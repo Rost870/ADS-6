@@ -1,19 +1,20 @@
-#ifndef TPQUEUE_H
-#define TPQUEUE_H
+// Copyright 2026 <Your Name>
+#ifndef INCLUDE_TPQUEUE_H_
+#define INCLUDE_TPQUEUE_H_
 
 template <typename T>
 struct Node {
     T data;
     Node* next;
-    Node(const T& d) : data(d), next(nullptr) {}
+    explicit Node(const T& d) : data(d), next(nullptr) {}
 };
 
 template <typename T>
 class TPQueue {
-private:
+ private:
     Node<T>* head;
 
-public:
+ public:
     TPQueue() : head(nullptr) {}
 
     ~TPQueue() {
@@ -28,7 +29,7 @@ public:
 
     void push(const T& item) {
         Node<T>* newNode = new Node<T>(item);
-        
+
         if (head == nullptr || item.prior > head->data.prior) {
             newNode->next = head;
             head = newNode;
@@ -36,7 +37,7 @@ public:
         }
 
         Node<T>* current = head;
-        while (current->next != nullptr && 
+        while (current->next != nullptr &&
                item.prior <= current->next->data.prior) {
             current = current->next;
         }
@@ -56,4 +57,4 @@ public:
     }
 };
 
-#endif
+#endif  // INCLUDE_TPQUEUE_H_
